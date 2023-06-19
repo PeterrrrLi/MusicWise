@@ -1,0 +1,24 @@
+{
+  "name": "top-music-database-app",
+  "version": "1.0.0",
+  "description": "## Goals Top-Music-Database-APP is a music ranking APP that supports the following: Insertion of user's favorite music that wasn't included. The application will also incorporate deletion, modification, and querying of any user’s desired entries.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeterrrrLi/Top-Music-Database-APP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeterrrrLi/Top-Music-Database-APP/issues"
+  },
+  "homepage": "https://github.com/PeterrrrLi/Top-Music-Database-APP#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22"
+  }
+}
