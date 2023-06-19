@@ -12,3 +12,7 @@ MySql
 
 ## Dataset
 Spotify Top 10000 Streamed Songs on Kaggle (https://www.kaggle.com/datasets/rakkesharv/spotify-top-10000-streamed-songs)
+
+## Start App
+`npm run dev` or
+`npm start`
