@@ -8,6 +8,8 @@ const musicRouter = require('./routes/musicRoute');
 // Connect to database
 dbInit()
 
+// app //
+
 const app = express();
 
 app.use(express.json()); //Used to parse JSON bodies
