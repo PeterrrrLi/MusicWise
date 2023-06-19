@@ -1,22 +1,20 @@
 const express = require('express');
+const { dbInit } = require('./database/db_init');
 const mysql = require('mysql');
 
-// create connection
-const db = mysql.createConnection({
-    host: 'us-cdbr-east-06.cleardb.net',
-    user: 'b821f9605c65b7',
-    password: '7dc64a05',
-    // database: 'cleardb-concave-15040'
-});
+// routers //
+const musicRouter = require('./routes/musicRoute');
 
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('MySql Connected ...');
-})
+// Connect to database
+dbInit()
 
 const app = express();
+
+app.use(express.json()); //Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
+
+
+app.use("/", musicRouter);
 
 app.listen('3000', () => {
     console.log("Server started on port 3000")
