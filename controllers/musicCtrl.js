@@ -1,13 +1,34 @@
-
+const { getDBInstance } = require('../database/db_init');
 
 
 // @desc        Get Top 10 songs by Rank
 // @route       GET /getTop10
 // @access      Public
-exports.getTop10 = async (req, res) => {
+exports.getTop10 = function(req, res) {
+    const sqlPool = getDBInstance();
     
-    res.status(200).json({
-        "Data:": "placeholder"
+    // Acquire a connection from the pool
+    sqlPool.pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error acquiring connection from pool:', err);
+            res.status(500).json({ error: 'Failed to retrieve data' });
+        } else {
+            // Execute the query using the acquired connection
+            connection.query(
+                'SELECT * FROM `fan_music_rank` GROUP BY music_ID ORDER BY AVG(rank) LIMIT 10',
+                (error, results, fields) => {
+                    // Release the connection back to the pool
+                    connection.release();
+
+                    if (error) {
+                        console.error('Error executing query:', error);
+                        res.status(500).json({ error: 'Failed to retrieve data' });
+                    } else {
+                        res.status(200).json(results);
+                    }
+                }
+            );
+        }
     });
 };
 
