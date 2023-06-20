@@ -32,3 +32,11 @@ exports.getTop10 = function(req, res) {
     });
 };
 
+
+// @desc        test
+// @route       GET /hello
+// @access      Public
+exports.hello = function(req, res) {
+    res.status(200).json({"message:":"hello world"});              
+};
+
