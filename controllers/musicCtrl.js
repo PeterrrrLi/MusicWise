@@ -15,7 +15,7 @@ exports.getTop10 = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT * FROM `fan_music_rank` GROUP BY music_ID ORDER BY AVG(rank) LIMIT 10',
+                'SELECT music_ID, AVG(rank) as avg_rank FROM `fan_music_rank` GROUP BY music_ID ORDER BY AVG(rank) LIMIT 10',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
