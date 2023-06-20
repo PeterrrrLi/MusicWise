@@ -1,4 +1,4 @@
-const { getDBInstance } = require('../database/db_init');
+const { getDBInstance } = require('../../src/database/db_init');
 
 
 // @desc        Get Top 10 songs by Rank
@@ -30,5 +30,13 @@ exports.getTop10 = function(req, res) {
             );
         }
     });
+};
+
+
+// @desc        test
+// @route       GET /hello
+// @access      Public
+exports.hello = function(req, res) {
+    res.status(200).json({"message:":"hello world"});              
 };
 
