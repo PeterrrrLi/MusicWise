@@ -10,19 +10,6 @@ class Database {
       database: 'heroku_54e3f38f2db2aeb'
     });
   }
-
-  connect() {
-    this.connection.connect((err) => {
-      if (err) {
-        throw err;
-      }
-      console.log('MySql Connected ...');
-    });
-  }
-
-  query(sql, callback) {
-    this.connection.query(sql, callback);
-  }
 }
 
 // Create a singleton instance of the Database class
