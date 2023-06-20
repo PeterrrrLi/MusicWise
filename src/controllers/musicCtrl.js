@@ -1,4 +1,4 @@
-const { getDBInstance } = require('../../src/database/db_init');
+const { getDBInstance } = require('../database/db_init');
 
 
 // @desc        Get Top 10 songs by Rank
