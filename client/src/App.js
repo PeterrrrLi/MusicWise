@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import logo from './placeholder.png'; 
+import FanRankTable from './components/fanRankTable';
 
 function App() {
   const [search, setSearch] = useState('');
@@ -23,7 +24,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <img src={logo} className="app-logo" alt="logo" />
+        <FanRankTable />
         <h1>xxxxx</h1>
         <p>
           Welcome to Hip Hop Unleashed, the platform for hip hop fans to explore,
