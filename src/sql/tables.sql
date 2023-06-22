@@ -88,6 +88,7 @@ USE `heroku_54e3f38f2db2aeb`;
 DROP procedure IF EXISTS `check_constraint_insert_on_fan_music_rank`;
 DROP procedure IF EXISTS `check_constraint_insert_on_fan_artist_rank`;
 DROP procedure IF EXISTS `check_constraint_insert_on_artist`;
+DROP procedure IF EXISTS `check_constraint_insert_on_music_info`;
 
 
 
@@ -125,7 +126,7 @@ END$$
 
 DELIMITER $$ 
 USE `heroku_54e3f38f2db2aeb`$$
-CREATE PROCEDURE `check_constraint_insert_on_artist` (IN artist_ID INT, IN artist_name INT, IN artist_rank INT)
+CREATE PROCEDURE `check_constraint_insert_on_artist` (IN artist_ID INT, IN artist_name VARCHAR(45), IN artist_rank INT)
 BEGIN
     IF artist_ID IN (SELECT artist_ID FROM artist) THEN
 		SIGNAL SQLSTATE '45001'
@@ -141,7 +142,7 @@ END$$
 
 DELIMITER $$ 
 USE `heroku_54e3f38f2db2aeb`$$
-CREATE PROCEDURE `check_constraint_insert_on_music_info` (IN music_ID INT, IN music_title INT, IN artist_ID INT)
+CREATE PROCEDURE `check_constraint_insert_on_music_info` (IN music_ID INT, IN music_title VARCHAR(45), IN artist_ID INT)
 BEGIN
     IF artist_ID NOT IN (SELECT artist_ID FROM artist) THEN
 		SIGNAL SQLSTATE '45001'
@@ -153,18 +154,61 @@ BEGIN
     END IF;
 END$$
 
--- USE `heroku_54e3f38f2db2aeb`$$
--- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_INSERT` BEFORE INSERT ON `fan_music_rank` FOR EACH ROW
--- BEGIN
--- 	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
--- END$$
 
--- USE `heroku_54e3f38f2db2aeb`$$
--- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_UPDATE` BEFORE UPDATE ON `fan_music_rank` FOR EACH ROW
--- BEGIN
--- 	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
--- END$$
--- DELIMITER ;
+DELIMITER $$ 
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE PROCEDURE `actual_update_peak` (IN music_ID INT, IN new_peak INT)
+BEGIN
+	UPDATE peak
+	SET `peak_position` = new_peak,
+		`peak_frequency` = 1,
+		`peak_stream` = 0
+	WHERE `music_ID` = music_ID;
+END$$
+
+
+
+DELIMITER $$ 
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE PROCEDURE `auto_update_peak` (IN music_ID INT, IN old_peak INT)
+BEGIN
+	IF old_peak != (
+	SELECT AVG(f.rank) ranking_pos
+	FROM fan_music_rank f
+	GROUP BY f.music_ID
+	HAVING f.music_ID = music_ID
+	)
+    THEN CALL `actual_update_peak`(music_ID, (
+	SELECT AVG(f.rank) ranking_pos
+	FROM fan_music_rank f
+	GROUP BY f.music_ID
+	HAVING f.music_ID = music_ID
+	));
+    END IF;
+END$$
+
+
+-- Triggers with those stored procedures
+
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_INSERT` BEFORE INSERT ON `fan_music_rank` FOR EACH ROW
+BEGIN
+	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
+END$$
+
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_UPDATE` BEFORE UPDATE ON `fan_music_rank` FOR EACH ROW
+BEGIN
+	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
+END$$
+
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_AFTER_UPDATE` AFTER INSERT ON `fan_music_rank` FOR EACH ROW
+BEGIN
+	CALL `heroku_54e3f38f2db2aeb`.`auto_update_peak`(new.music_ID, old.peak);
+END$$
+
+DELIMITER ;
 
 
 
