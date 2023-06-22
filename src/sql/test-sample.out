@@ -1,0 +1,64 @@
+
+Feature 1:
+
+music_ID,music_title,avg_rank
+1,"Ghost Face",1.0000
+2,Snow,2.0000
+3,"Mr. Bentley",3.0000
+4,"Mr. Almost",4.0000
+5,"Dummy Song Name1",5.0000
+6,"Dummy Song Name2",6.0000
+7,"Dummy Song Name3",7.0000
+8,"Dummy Song Name4",8.0000
+9,"Dummy Song Name5",9.0000
+10,"Dummy Song Name6",10.0000
+
+Feature 2:
+
+artist_ID,artist_name,avg_rank
+1,Pharaoh,1.0000
+2,Capper,2.0000
+3,"Higher Brothers",3.0000
+4,"MC HotDog",4.0000
+5,Gai,5.0000
+6,Vava,6.0000
+7,Vinida,7.0000
+8,"Tizzy T",8.0000
+9,MaSiWei,9.0000
+10,Knowknow,10.0000
+11,"MC Jin",11.0000
+12,"Jony J",12.0000
+13,"Key NG",13.0000
+
+Feature 3:
+
+music_ID,music_title
+1,"Ghost Face"
+2,Snow
+3,"Mr. Bentley"
+4,"Mr. Almost"
+5,"Dummy Song Name1"
+
+Feature 4:
+
+music_ID,music_title,Spotify_Rank,Fan_Rank
+1,"Ghost Face",1,1
+2,Snow,2,2
+
+Feature 5:
+
+rank_ID,music_ID,rank
+1,1,1
+2,2,2
+3,3,3
+4,4,4
+5,5,5
+6,6,6
+7,7,7
+8,8,8
+9,9,9
+10,10,10
+11,11,11
+12,12,12
+13,13,13
+14,2,100
