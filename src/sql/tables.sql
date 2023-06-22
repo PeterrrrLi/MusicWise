@@ -39,7 +39,7 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`spotify_rank` (
     
     
 CREATE TABLE `heroku_54e3f38f2db2aeb`.`fan_artist_rank` (
-  `rank_ID` INT NOT NULL,
+  `rank_ID` INT NOT NULL AUTO_INCREMENT,
   `artist_ID` INT NOT NULL,
   `rank` INT NOT NULL,
   PRIMARY KEY (`rank_ID`),
@@ -50,7 +50,7 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`fan_artist_rank` (
 
 
 CREATE TABLE `heroku_54e3f38f2db2aeb`.`fan_music_rank` (
-  `rank_ID` INT NOT NULL,
+  `rank_ID` INT NOT NULL AUTO_INCREMENT,
   `music_ID` INT NOT NULL,
   `rank` INT NOT NULL,
   PRIMARY KEY (`rank_ID`),
@@ -89,6 +89,9 @@ DROP procedure IF EXISTS `check_constraint_insert_on_fan_music_rank`;
 DROP procedure IF EXISTS `check_constraint_insert_on_fan_artist_rank`;
 DROP procedure IF EXISTS `check_constraint_insert_on_artist`;
 DROP procedure IF EXISTS `check_constraint_insert_on_music_info`;
+DROP procedure IF EXISTS `actual_update_peak`;
+DROP procedure IF EXISTS `auto_update_peak`;
+
 
 
 
@@ -190,25 +193,24 @@ END$$
 
 -- Triggers with those stored procedures
 
-USE `heroku_54e3f38f2db2aeb`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_INSERT` BEFORE INSERT ON `fan_music_rank` FOR EACH ROW
-BEGIN
-	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
-END$$
+-- USE `heroku_54e3f38f2db2aeb`$$
+-- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_INSERT` BEFORE INSERT ON `fan_music_rank` FOR EACH ROW
+-- BEGIN
+-- 	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
+-- END$$
 
-USE `heroku_54e3f38f2db2aeb`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_UPDATE` BEFORE UPDATE ON `fan_music_rank` FOR EACH ROW
-BEGIN
-	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
-END$$
+-- USE `heroku_54e3f38f2db2aeb`$$
+-- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_UPDATE` BEFORE UPDATE ON `fan_music_rank` FOR EACH ROW
+-- BEGIN
+-- 	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
+-- END$$
 
-USE `heroku_54e3f38f2db2aeb`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_AFTER_UPDATE` AFTER INSERT ON `fan_music_rank` FOR EACH ROW
-BEGIN
-	CALL `heroku_54e3f38f2db2aeb`.`auto_update_peak`(new.music_ID, old.peak);
-END$$
-
-DELIMITER ;
+-- USE `heroku_54e3f38f2db2aeb`$$
+-- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_AFTER_UPDATE` AFTER INSERT ON `fan_music_rank` FOR EACH ROW
+-- BEGIN
+-- 	CALL `heroku_54e3f38f2db2aeb`.`auto_update_peak`(new.music_ID, old.peak);
+-- END$$
+-- DELIMITER ;
 
 
 
