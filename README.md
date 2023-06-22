@@ -19,6 +19,6 @@ AWS
 Spotify Top 10000 Streamed Songs on Kaggle (https://www.kaggle.com/datasets/rakkesharv/spotify-top-10000-streamed-songs)
 
 ## Start App
-`cd client` then 
-`npm run dev` or
-`npm start`
+1.  `cd client` to go to frontend directory,  <br />
+2.  install dependencies with `npm i`,  <br />
+3.  run the app using `npm start` 
