@@ -1,12 +1,14 @@
 .navbar-brand{
-    font-size: 1.5rem !important;
+    font-size: 1.8rem !important;
+    margin-left: 1.2rem;
 }
 
 .nav-link{
-    font-size: 1.2rem !important;
+    font-size: 1.6rem !important;
     vertical-align: bottom !important;
     padding-bottom: 0.35rem !important;
     opacity: 0.8;
+    margin-left: 0.8rem;
 }
 
 .nav-link:hover{
@@ -17,15 +19,6 @@
     float: right !important;
   }
 
-.login,.register{
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
-    opacity: 0.8 !important;
-}
-
-.login:hover,.register:hover{
-    opacity: 0.9 !important;
-}
 
 .main-nav{
     background-color:rgba(13,16,23,1) !important;
@@ -36,10 +29,6 @@
     width: 100%;
 }
 
-.nav-name{
-    margin-left:0 !important;
-}
-
-.nav-container{
-    margin-left:2.3% !important;
+.searchbar{
+    font-size: 1.2rem !important;
 }

@@ -3,8 +3,9 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import './navbar.css'
 
-function NavScrollExample() {
+function NavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
       <Container fluid>
@@ -17,8 +18,8 @@ function NavScrollExample() {
             navbarScroll
           >
             <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/rank">Rank</Nav.Link>
+              <Nav.Link className="nav-link" href="/">Home</Nav.Link>
+              <Nav.Link className="nav-link" href="/rank">Rank</Nav.Link>
             </Nav>
             
           </Nav>
@@ -26,7 +27,7 @@ function NavScrollExample() {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2"
+              className="me-2 searchbar"
               aria-label="Search"
             />
             <Button variant="outline-success">Search</Button>
@@ -37,4 +38,4 @@ function NavScrollExample() {
   )
 }
 
-export default NavScrollExample
+export default NavBar
