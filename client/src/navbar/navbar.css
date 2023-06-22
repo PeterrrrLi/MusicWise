@@ -1,0 +1,34 @@
+.navbar-brand{
+    font-size: 1.8rem !important;
+    margin-left: 1.2rem;
+}
+
+.nav-link{
+    font-size: 1.6rem !important;
+    vertical-align: bottom !important;
+    padding-bottom: 0.35rem !important;
+    opacity: 0.8;
+    margin-left: 0.8rem;
+}
+
+.nav-link:hover{
+    opacity: 0.9;
+}
+
+.navbar-right {
+    float: right !important;
+  }
+
+
+.main-nav{
+    background-color:rgba(13,16,23,1) !important;
+    padding-left:0 !important;
+    position: fixed ; 
+    top: 0 ;
+    z-index: 3;
+    width: 100%;
+}
+
+.searchbar{
+    font-size: 1.2rem !important;
+}

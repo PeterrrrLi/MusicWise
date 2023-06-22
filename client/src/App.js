@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import './App.css';
-import logo from './placeholder.png'; 
+import Home from './home/home'
+import NavBar from './navbar/navbar'
+import RankPage from './rankpage/rankpage';
 import FanRankTable from './components/fanRankTable';
 
-function App() {
+export default function App() {
+  
   const [search, setSearch] = useState('');
 
   const handleSearchChange = event => {
@@ -22,29 +28,18 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <FanRankTable />
-        <h1>xxxxx</h1>
-        <p>
-          Welcome to Hip Hop Unleashed, the platform for hip hop fans to explore,
-          rate, and rank their favorite tracks. Discover how fan favorites differ
-          from mainstream rankings and join the community today!
-        </p>
-      </header>
-      <main>
-        <div className="search-container">
-          <input
-            className="search-bar"
-            type="text"
-            value={search}
-            onChange={handleSearchChange}
-            placeholder="Search for an artist or song..."
-          />
-        </div>
-      </main>
+    <div>
+      <NavBar />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="rank" element={<FanRankTable />} />
+        </Routes>
+      </BrowserRouter>
     </div>
+
   );
 }
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
