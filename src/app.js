@@ -1,8 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const { dbInit } = require('./database/db_init');
 const mysql = require('mysql');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // routers //
 const musicRouter = require('./routes/musicRoute');
@@ -14,6 +15,8 @@ dbInit()
 
 const app = express();
 
+
+app.use(cors());
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded()); //Parse URL-encoded bodies
 
