@@ -20,8 +20,6 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`music_info` (
   `music_title` VARCHAR(45) NOT NULL,
   `artist_ID` INT NOT NULL,
   PRIMARY KEY (`music_ID`),
-  UNIQUE INDEX `music_ID_UNIQUE` (`music_ID` ASC),
-  INDEX `artist_ID_idx` (`artist_ID` ASC),
   FOREIGN KEY (`artist_ID`)
   REFERENCES `heroku_54e3f38f2db2aeb`.`artist` (`artist_ID`)
   ON DELETE CASCADE
@@ -45,8 +43,6 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`fan_artist_rank` (
   `artist_ID` INT NOT NULL,
   `rank` INT NOT NULL,
   PRIMARY KEY (`rank_ID`),
-  UNIQUE INDEX `rank_ID_UNIQUE` (`rank_ID` ASC),
-  INDEX `artist_ID_idx` (`artist_ID` ASC),
   FOREIGN KEY (`artist_ID`)
   REFERENCES `heroku_54e3f38f2db2aeb`.`artist` (`artist_ID`)
   ON DELETE CASCADE
@@ -58,8 +54,6 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`fan_music_rank` (
   `music_ID` INT NOT NULL,
   `rank` INT NOT NULL,
   PRIMARY KEY (`rank_ID`),
-  UNIQUE INDEX `rank_ID_UNIQUE` (`rank_ID` ASC),
-  INDEX `music_ID_idx` (`music_ID` ASC),
   FOREIGN KEY (`music_ID`)
   REFERENCES `heroku_54e3f38f2db2aeb`.`music_info` (`music_ID`)
   ON DELETE CASCADE
@@ -70,7 +64,6 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`music_age` (
   `music_ID` INT NOT NULL,
   `days` INT NOT NULL,
   PRIMARY KEY (`music_ID`),
-  UNIQUE INDEX `music_ID_UNIQUE` (`music_ID` ASC),
   FOREIGN KEY (`music_ID`)
   REFERENCES `heroku_54e3f38f2db2aeb`.`music_info` (`music_ID`)
   ON DELETE CASCADE
@@ -83,11 +76,97 @@ CREATE TABLE `heroku_54e3f38f2db2aeb`.`peak` (
   `peak_frequency` INT NOT NULL,
   `peak_stream` INT NOT NULL,
   PRIMARY KEY (`music_ID`),
-  UNIQUE INDEX `music_ID_UNIQUE` (`music_ID` ASC),
   FOREIGN KEY (`music_ID`)
   REFERENCES `heroku_54e3f38f2db2aeb`.`music_info` (`music_ID`)
   ON DELETE CASCADE
   ON UPDATE CASCADE);
+  
+  
+  
+
+USE `heroku_54e3f38f2db2aeb`;
+DROP procedure IF EXISTS `check_constraint_insert_on_fan_music_rank`;
+DROP procedure IF EXISTS `check_constraint_insert_on_fan_artist_rank`;
+DROP procedure IF EXISTS `check_constraint_insert_on_artist`;
+
+
+
+
+DELIMITER $$
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE PROCEDURE `check_constraint_insert_on_fan_music_rank` (IN rank INT, IN music_ID INT, IN rank_ID INT)
+BEGIN
+    IF rank < 0 THEN
+        SIGNAL SQLSTATE '45000'
+           SET MESSAGE_TEXT = 'check_constraint_insert_on_fan_music_rank failed';
+    END IF;
+    IF music_ID NOT IN (SELECT music_ID FROM music_info) THEN
+		SIGNAL SQLSTATE '45001'
+			SET MESSAGE_TEXT = 'check_constraint_insert_on_fan_music_rank failed';
+    END IF;
+END$$
+
+
+
+DELIMITER $$ 
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE PROCEDURE `check_constraint_insert_on_fan_artist_rank` (IN rank INT, IN artist_ID INT, IN rank_ID INT)
+BEGIN
+    IF rank < 0 THEN
+        SIGNAL SQLSTATE '45000'
+           SET MESSAGE_TEXT = 'check_constraint_insert_on_fan_artist_rank failed';
+    END IF;
+    IF artist_ID NOT IN (SELECT artist_ID FROM artist) THEN
+		SIGNAL SQLSTATE '45001'
+			SET MESSAGE_TEXT = 'check_constraint_insert_on_fan_artist_rank failed';
+    END IF;
+END$$
+
+
+DELIMITER $$ 
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE PROCEDURE `check_constraint_insert_on_artist` (IN artist_ID INT, IN artist_name INT, IN artist_rank INT)
+BEGIN
+    IF artist_ID IN (SELECT artist_ID FROM artist) THEN
+		SIGNAL SQLSTATE '45001'
+			SET MESSAGE_TEXT = 'check_constraint_insert_on_artist failed';
+    END IF;
+    IF artist_rank IN (SELECT artist_rank FROM artist) THEN
+		SIGNAL SQLSTATE '45001'
+			SET MESSAGE_TEXT = 'check_constraint_insert_on_artist failed';
+    END IF;
+END$$
+
+
+
+DELIMITER $$ 
+USE `heroku_54e3f38f2db2aeb`$$
+CREATE PROCEDURE `check_constraint_insert_on_music_info` (IN music_ID INT, IN music_title INT, IN artist_ID INT)
+BEGIN
+    IF artist_ID NOT IN (SELECT artist_ID FROM artist) THEN
+		SIGNAL SQLSTATE '45001'
+			SET MESSAGE_TEXT = 'check_constraint_insert_on_music_info failed';
+    END IF;
+    IF music_ID IN (SELECT music_ID FROM music_info) THEN
+		SIGNAL SQLSTATE '45001'
+			SET MESSAGE_TEXT = 'check_constraint_insert_on_music_info failed';
+    END IF;
+END$$
+
+-- USE `heroku_54e3f38f2db2aeb`$$
+-- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_INSERT` BEFORE INSERT ON `fan_music_rank` FOR EACH ROW
+-- BEGIN
+-- 	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
+-- END$$
+
+-- USE `heroku_54e3f38f2db2aeb`$$
+-- CREATE DEFINER = CURRENT_USER TRIGGER `heroku_54e3f38f2db2aeb`.`fan_music_rank_BEFORE_UPDATE` BEFORE UPDATE ON `fan_music_rank` FOR EACH ROW
+-- BEGIN
+-- 	CALL `heroku_54e3f38f2db2aeb`.`check_constraint_insert_on_fan_music_rank`(new.rank, new.music_ID, new.rankID);
+-- END$$
+-- DELIMITER ;
+
+
 
 INSERT INTO `heroku_54e3f38f2db2aeb`.`artist` (`artist_ID`, `artist_name`, `artist_rank`) VALUES ('1', 'Pharaoh', '1');
 INSERT INTO `heroku_54e3f38f2db2aeb`.`artist` (`artist_ID`, `artist_name`, `artist_rank`) VALUES ('2', 'Capper', '2');
