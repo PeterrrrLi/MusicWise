@@ -7,7 +7,7 @@ HipHopHierarchy is a highly interactive, **database**-driven, **RESTful** web-ba
 JavaScript, Node.js, Express.js 
 
 ## Database stack
-MySql
+MySql, ClearDB
 
 ## Cloud Platform
 Heroku
