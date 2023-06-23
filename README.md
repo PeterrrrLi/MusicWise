@@ -3,6 +3,9 @@
 ## Goals
 HipHopHierarchy is a highly interactive, **database**-driven, **RESTful** web-based application for hip-hop fans with **MySQL**, **Node.js** backend and **React** frontend, deployed onto **Heroku**. It allows users to explore and rank songs and artists from the Spotify Top 10000 Streamed Songs dataset. The application provides detailed song and artist information and fosters a fan-based ranking system, merging mainstream popularity with niche preferences. 
 
+### Currently Supports:  
+Displaying top 10 ranked musics' ID's
+
 ## Backend stack
 JavaScript, Node.js, Express.js 
 
