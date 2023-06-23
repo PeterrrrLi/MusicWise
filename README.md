@@ -1,15 +1,13 @@
 # Top-Music-Database-APP
 
 ## Goals
-Top Music Database APP is **database**-driven, **RESTful** web app with **MySQL**, **Node.js** backend and **React** frontend, deployed onto **AWS**, with live data from Spotify API, designed for music fans.
-The app supports:
-Insertion of user's favorite music that wasn't included. The application will also incorporate deletion, modification, and querying of any user’s desired entries. 
+HipHopHierarchy is a highly interactive, **database**-driven, **RESTful** web-based application for hip-hop fans with **MySQL**, **Node.js** backend and **React** frontend, deployed onto **Heroku**. It allows users to explore and rank songs and artists from the Spotify Top 10000 Streamed Songs dataset. The application provides detailed song and artist information and fosters a fan-based ranking system, merging mainstream popularity with niche preferences. 
 
 ## Backend stack
 JavaScript, Node.js, Express.js 
 
 ## Database stack
-MySql
+MySql, ClearDB
 
 ## Cloud Platform
 Heroku
@@ -17,6 +15,7 @@ AWS
 
 ## Dataset
 Spotify Top 10000 Streamed Songs on Kaggle (https://www.kaggle.com/datasets/rakkesharv/spotify-top-10000-streamed-songs)
+Spotify API
 
 ## Start App
 1.  `cd client` to go to frontend directory,  <br />
