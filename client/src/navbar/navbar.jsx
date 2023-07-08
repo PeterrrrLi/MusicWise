@@ -3,6 +3,12 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFire } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
+
 import './navbar.css'
 
 function NavBar() {
@@ -19,7 +25,15 @@ function NavBar() {
           >
             <Nav className="me-auto">
               <Nav.Link className="nav-link" href="/">Home</Nav.Link>
-              <Nav.Link className="nav-link" href="/rank">Rank</Nav.Link>
+              <Nav.Link className="nav-link" href="/rank">
+                <FontAwesomeIcon icon={faFire} /> <span> </span>
+                Top 10 Songs
+              </Nav.Link>
+              <Nav.Link className="nav-link" href="/rank">
+                <FontAwesomeIcon icon={faFire} /> <span> </span>
+                Top 10 Artists
+              </Nav.Link>
+              <Nav.Link className="nav-link" href="/rank">All Songs</Nav.Link>
             </Nav>
             
           </Nav>
