@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import useGetTopRanked from '../hooks/useGetTopRanked';
-import '../components/fanRankTable.css'
+import './allSongs.css'
 
-function FanRankTable() {
+function AllSongs() {
     const { data: rankings, isLoading, error } = useGetTopRanked();
     if (isLoading) {
         return <p>Loading...</p>;
@@ -35,4 +35,4 @@ function FanRankTable() {
     );
 }
 
-export default FanRankTable;
+export default AllSongs;

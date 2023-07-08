@@ -25,15 +25,15 @@ function NavBar() {
           >
             <Nav className="me-auto">
               <Nav.Link className="nav-link" href="/">Home</Nav.Link>
-              <Nav.Link className="nav-link" href="/rank">
+              <Nav.Link className="nav-link" href="/top10Songs">
                 <FontAwesomeIcon icon={faFire} /> <span> </span>
                 Top 10 Songs
               </Nav.Link>
-              <Nav.Link className="nav-link" href="/rank">
+              <Nav.Link className="nav-link" href="/top10Artists">
                 <FontAwesomeIcon icon={faFire} /> <span> </span>
                 Top 10 Artists
               </Nav.Link>
-              <Nav.Link className="nav-link" href="/rank">All Songs</Nav.Link>
+              <Nav.Link className="nav-link" href="/allSongs">All Songs</Nav.Link>
             </Nav>
             
           </Nav>

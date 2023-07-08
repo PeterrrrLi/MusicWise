@@ -6,7 +6,10 @@ import './App.css';
 import Home from './home/home'
 import NavBar from './navbar/navbar'
 import RankPage from './rankpage/rankpage';
-import FanRankTable from './components/fanRankTable';
+import Top10Songs from './top10Songs/top10Songs';
+import Top10Artists from './top10Artists/top10Artists';
+import AllSongs from './allSongs/allSongs';
+
 
 export default function App() {
   
@@ -33,7 +36,9 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="rank" element={<FanRankTable />} />
+          <Route path="top10Songs" element={<Top10Songs />} />
+          <Route path="top10Artists" element={<Top10Artists />} />
+          <Route path="allSongs" element={<AllSongs />} />
         </Routes>
       </BrowserRouter>
     </div>
