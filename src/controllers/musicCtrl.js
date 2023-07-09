@@ -2,9 +2,9 @@ const { getDBInstance } = require('../database/db_init');
 
 
 // @desc        Get Top 10 songs by Rank
-// @route       GET /getTop10
+// @route       GET /getTop10FanRank
 // @access      Public
-exports.getTop10 = function(req, res) {
+exports.getTop10FanRank = function(req, res) {
     const sqlPool = getDBInstance();
     
     // Acquire a connection from the pool
@@ -15,7 +15,48 @@ exports.getTop10 = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT music_ID, AVG(rank) as avg_rank FROM `fan_music_rank` GROUP BY music_ID ORDER BY AVG(rank) LIMIT 10',
+                'SELECT music_title, AVG(rank) as avg_rank ' +
+                'FROM `fan_music_rank` f ' +
+                'JOIN `music_info` m ' +
+                'ON f.music_ID = m.music_ID ' +
+                'GROUP BY f.music_ID ASC ' +
+                'ORDER BY AVG(rank) LIMIT 10; ',
+                (error, results, fields) => {
+                    // Release the connection back to the pool
+                    connection.release();
+
+                    if (error) {
+                        console.error('Error executing query:', error);
+                        res.status(500).json({ error: 'Failed to retrieve data' });
+                    } else {
+                        res.status(200).json(results);
+                    }
+                }
+            );
+        }
+    });
+};
+
+// @desc        Get Top 10 songs by SpotifyRank
+// @route       GET /getTop10SpotifyRank
+// @access      Public
+exports.getTop10SpotifyRank = function(req, res) {
+    const sqlPool = getDBInstance();
+    
+    // Acquire a connection from the pool
+    sqlPool.pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error acquiring connection from pool:', err);
+            res.status(500).json({ error: 'Failed to retrieve data' });
+        } else {
+            // Execute the query using the acquired connection
+            connection.query(
+                'SELECT music_title, ave_rank as avg_rank ' +
+                'FROM `spotify_rank` f ' +
+                'JOIN `music_info` m ' +
+                'ON f.music_ID = m.music_ID ' +
+                'GROUP BY f.music_ID ASC ' +
+                'ORDER BY f.ave_rank; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
