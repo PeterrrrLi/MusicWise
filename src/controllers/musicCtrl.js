@@ -15,7 +15,7 @@ exports.getTop10FanRank = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT music_ID, music_title, AVG(rank) as avg_rank ' +
+                'SELECT m.music_ID, music_title, AVG(rank) as avg_rank ' +
                 'FROM `fan_music_rank` f ' +
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
@@ -51,7 +51,7 @@ exports.getTop10SpotifyRank = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT music_ID, music_title, ave_rank as avg_rank ' +
+                'SELECT m.music_ID, music_title, ave_rank as avg_rank ' +
                 'FROM `spotify_rank` f ' +
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
