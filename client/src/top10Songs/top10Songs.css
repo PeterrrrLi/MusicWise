@@ -20,6 +20,7 @@ table {
   box-shadow: 0 0 0 1px black;
   overflow: hidden;
   max-width: 80rem;
+  height: fit-content;
 }
 
 li, p, a, td{
