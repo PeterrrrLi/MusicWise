@@ -8,7 +8,7 @@ router.get('/getTop10FanRank', MusicCtrl.getTop10FanRank)
 router.get('/getTop10SpotifyRank', MusicCtrl.getTop10SpotifyRank)
 router.get('/getTop10Artists', MusicCtrl.getTop10Artists)
 router.get('/getAllSongs', MusicCtrl.getAllSongs)
-
+router.post('/insertUserRanking', MusicCtrl.insertUserRanking)
 router.get('/hello', MusicCtrl.hello)
 
 module.exports = router;
