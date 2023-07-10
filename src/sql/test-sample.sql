@@ -13,6 +13,13 @@ ON f.artist_ID = a.artist_ID
 GROUP BY artist_ID 
 ORDER BY AVG(rank) LIMIT 20;
 
+-- top 10 artist by average Spotify rank
+SELECT m.artist_ID, AVG(ave_rank) as avg_ave_rank 
+FROM `spotify_rank` f 
+JOIN `music_info` m 
+ON f.music_ID = m.music_ID 
+GROUP BY artist_ID 
+ORDER BY AVG(ave_rank) LIMIT 10;
 
 SELECT music_ID, music_title
 FROM `music_info` m
