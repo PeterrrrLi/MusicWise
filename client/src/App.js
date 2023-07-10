@@ -21,8 +21,8 @@ function SearchResult({ item }) {
 
 export default function App() {
   const [search, setSearch] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');  // New state variable
-  const searchResult = useSearch(searchTerm);  // Use searchTerm here
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const searchResult = useSearch(searchTerm);
 
   const handleSearchChange = event => {
     setSearch(event.target.value);
@@ -30,7 +30,7 @@ export default function App() {
 
   const handleKeyPress = event => {
     if (event.key === 'Enter') {
-      console.log('Enter key pressed, searching for:', search);  // Modify this line
+      console.log('Enter key pressed, searching for:', search);
       setSearchTerm(search);
     }
   };

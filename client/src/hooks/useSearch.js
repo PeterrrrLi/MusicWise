@@ -12,10 +12,10 @@ const useSearch = (term) => {
     setIsLoading(true);
     try {
       const response = await axios.post('/search', { term });
-      console.log('Response:', response);  // Add this line
+      console.log('Response:', response);
       setData(response.data);
     } catch (error) {
-      console.log('Error:', error);  // Add this line
+      console.log('Error:', error);
       setError(error);
     }
     setIsLoading(false);
