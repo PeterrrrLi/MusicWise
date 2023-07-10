@@ -198,7 +198,10 @@ exports.search = function(req, res) {
             res.status(500).json({ error: 'Failed to retrieve data' });
         } else {
             connection.query(
-                'SELECT * FROM `music_info` WHERE `music_title` LIKE ? UNION SELECT * FROM `artist` WHERE `artist_name` LIKE ?',
+                'SELECT m.music_title, a.artist_name ' +
+                'FROM `music_info` m ' +
+                'JOIN `artist` a ON m.artist_ID = a.artist_ID ' +
+                'WHERE m.music_title LIKE ? OR a.artist_name LIKE ?; ',
                 [`%${term}%`, `%${term}%`],
                 (error, results, fields) => {
                     // Release the connection back to the pool
