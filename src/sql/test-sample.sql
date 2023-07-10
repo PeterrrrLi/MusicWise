@@ -44,6 +44,12 @@ VALUES (2, 100);
 SELECT * FROM fan_music_rank;
 
 
+SELECT *
+FROM music_info mi NATURAL JOIN artist a NATURAL JOIN music_age ma NATURAL JOIN spotify_rank sr NATURAL JOIN fan_music_rank fr
+ORDER BY music_title ASC;
+
+
+
 
 
 
