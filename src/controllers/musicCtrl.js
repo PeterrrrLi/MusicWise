@@ -136,6 +136,44 @@ exports.getAllSongs = function(req, res) {
     });
 };
 
+
+// @desc        Post user ranking
+// @route       POST /insertUserRanking
+// @access      Public
+// @param       {number} req.body.musicID - The ID of the music
+// @param       {number} req.body.rank - The rank for the music
+exports.insertUserRanking = function(req, res) {
+    const sqlPool = getDBInstance();
+
+    const { musicID, rank } = req.body;
+    
+    // Acquire a connection from the pool
+    sqlPool.pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error acquiring connection from pool:', err);
+            res.status(500).json({ error: 'Failed to retrieve data' });
+        } else {
+            // Execute the query using the acquired connection
+            connection.query(
+                'INSERT INTO `fan_music_rank` (`music_ID`, `rank`) VALUES (?, ?);',
+                [musicID, rank],
+                (error, results, fields) => {
+                    // Release the connection back to the pool
+                    connection.release();
+
+                    if (error) {
+                        console.error('Error executing query:', error);
+                        res.status(500).json({ error: 'Failed to retrieve data' });
+                    } else {
+                        res.status(200).json(results);
+                    }
+                }
+            );
+        }
+    });
+};
+
+
 // @desc        test
 // @route       GET /hello
 // @access      Public
