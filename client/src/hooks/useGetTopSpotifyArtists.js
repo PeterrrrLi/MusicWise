@@ -3,7 +3,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://top-music-database-app-ff988f7a68fa.herokuapp.com/'
 
-const useGetTopArtists = () => {
+const useGetTopSpotifyRank = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const useGetTopArtists = () => {
     console.log(data)
     setIsLoading(true);
     try {
-      var response = await axios.get('/getTop10FanArtists');
+      var response = await axios.get('/getTop10SpotifyArtists');
     } catch (error) {
       setError(error);
       console.log(error);
@@ -26,4 +26,4 @@ const useGetTopArtists = () => {
   return { data, isLoading, error };
 };
 
-export default useGetTopArtists;
+export default useGetTopSpotifyRank;

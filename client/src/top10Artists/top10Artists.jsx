@@ -1,37 +1,58 @@
 import React, { useEffect } from 'react';
-import useGetTopRanked from '../hooks/useGetTopRanked';
+import useGetTopArtists from '../hooks/useGetTopArtists';
+import useGetTopSpotifyArtists from '../hooks/useGetTopSpotifyArtists';
 import './top10Artists.css'
 
 function Top10Artists() {
-    const { data: rankings, isLoading, error } = useGetTopRanked();
-    if (isLoading) {
+    const { data: fanRankings, isLoadingFanRank, error1 } = useGetTopArtists();
+    const { data: spotifyRankings, isLoadingSpotifyRank, error2 } = useGetTopSpotifyArtists();
+    if (isLoadingFanRank || isLoadingSpotifyRank) {
         return <p>Loading...</p>;
     }
 
-    if (error) {
-        return <p>Error occurred: {error.message}</p>;
+    if (error1 || error2) {
+        return <p>Error occurred: {error1.message} {error2.message} </p>;
     }
 
     return (
-        <>{
-            <table style={{ color: 'white' }}>
-                <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Artist Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {rankings && rankings.map((ranking) => (
-                        <tr key={ranking.music_ID}>
-                            <td>{ranking.music_ID}</td>
-                            <td>{ranking.avg_rank}</td>
+        <>
+            <div style={{ display: 'flex' }}>
+                <table style={{ color: 'white' }}>
+                    <thead>
+                        <tr>
+                            <th>Artist Name</th>
+                            <th>Fan Ranking</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        }
+                    </thead>
+                    <tbody>
+                        {fanRankings && fanRankings.map((ranking) => (
+                            <tr key={ranking.artist_id}>
+                                <td>{ranking.artist_name}</td>
+                                <td>{ranking.avg_rank}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+                <table style={{ color: 'white' }}>
+                    <thead>
+                        <tr>
+                            <th>Artist Name</th>
+                            <th>Spotify Ranking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {spotifyRankings && spotifyRankings.map((ranking) => (
+                            <tr key={ranking.artist_ID}>
+                                <td>{ranking.artist_name}</td>
+                                <td>{ranking.avg_ave_rank}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
+        
     );
 }
 
