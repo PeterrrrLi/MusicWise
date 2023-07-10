@@ -9,11 +9,20 @@ import RankPage from './rankpage/rankpage';
 import Top10Songs from './top10Songs/top10Songs';
 import Top10Artists from './top10Artists/top10Artists';
 import AllSongs from './allSongs/allSongs';
+import useSearch from './hooks/useSearch'; 
 
+function SearchResult({ item }) {
+  return (
+    <div>
+      {item.music_title || item.artist_name}
+    </div>
+  );
+}
 
 export default function App() {
-  
   const [search, setSearch] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');  // New state variable
+  const searchResult = useSearch(searchTerm);  // Use searchTerm here
 
   const handleSearchChange = event => {
     setSearch(event.target.value);
@@ -21,15 +30,11 @@ export default function App() {
 
   const handleKeyPress = event => {
     if (event.key === 'Enter') {
-      handleSearch();
+      console.log('Enter key pressed, searching for:', search);  // Modify this line
+      setSearchTerm(search);
     }
   };
-
-  const handleSearch = () => {
-    console.log('Searching for:', search);
-    //  call API to get the search results
-  };
-
+  
   return (
     <div>
       <NavBar />
@@ -41,6 +46,9 @@ export default function App() {
           <Route path="allSongs" element={<AllSongs />} />
         </Routes>
       </BrowserRouter>
+      {searchResult.data && searchResult.data.map(item => (
+        <SearchResult key={item.music_ID} item={item} />
+      ))}
     </div>
 
   );
