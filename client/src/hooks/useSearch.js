@@ -11,7 +11,11 @@ const useSearch = (term) => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post('/search', { term });
+      const response = await axios.get('/search', {
+        params: {
+          term
+        }
+      });
       console.log('Response:', response);
       setData(response.data);
     } catch (error) {

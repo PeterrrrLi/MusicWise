@@ -183,30 +183,27 @@ exports.hello = function(req, res) {
 
 
 // @desc        Search for songs or artists
-// @route       POST /search
+// @route       GET /search
 // @access      Public
 // @param       {string} req.body.term - The search term
 exports.search = function(req, res) {
     const sqlPool = getDBInstance();
 
-    const { term } = req.body;
+    const { term } = req.query;
     
-    // Acquire a connection from the pool
     sqlPool.pool.getConnection((err, connection) => {
         if (err) {
             console.error('Error acquiring connection from pool:', err);
             res.status(500).json({ error: 'Failed to retrieve data' });
         } else {
             connection.query(
-                'SELECT m.music_ID, m.music_title, a.artist_name ' +
+                'SELECT m.music_title, a.artist_name ' +
                 'FROM `music_info` m ' +
                 'JOIN `artist` a ON m.artist_ID = a.artist_ID ' +
                 'WHERE m.music_title LIKE ? OR a.artist_name LIKE ?; ',
                 [`%${term}%`, `%${term}%`],
                 (error, results, fields) => {
-                    // Release the connection back to the pool
                     connection.release();
-
                     if (error) {
                         console.error('Error executing query:', error);
                         res.status(500).json({ error: 'Failed to retrieve data' });
@@ -218,4 +215,3 @@ exports.search = function(req, res) {
         }
     });
 };
-

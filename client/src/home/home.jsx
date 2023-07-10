@@ -15,7 +15,6 @@ const Home = () => {
           today!
         </p>
       </header>
-
       <SearchBar />
     </div>
   )

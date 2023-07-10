@@ -9,7 +9,6 @@ import RankPage from './rankpage/rankpage';
 import Top10Songs from './top10Songs/top10Songs';
 import Top10Artists from './top10Artists/top10Artists';
 import AllSongs from './allSongs/allSongs';
-import useSearch from './hooks/useSearch'; 
 
 
 export default function App() {
