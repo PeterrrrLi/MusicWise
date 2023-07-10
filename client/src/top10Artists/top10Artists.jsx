@@ -20,7 +20,7 @@ function Top10Artists() {
                 <table style={{ color: 'white' }}>
                     <thead>
                         <tr>
-                            <th>Music Title</th>
+                            <th>Artist Name</th>
                             <th>Fan Ranking</th>
                         </tr>
                     </thead>
@@ -37,7 +37,7 @@ function Top10Artists() {
                 <table style={{ color: 'white' }}>
                     <thead>
                         <tr>
-                            <th>Music Title</th>
+                            <th>Artist Name</th>
                             <th>Spotify Ranking</th>
                         </tr>
                     </thead>
