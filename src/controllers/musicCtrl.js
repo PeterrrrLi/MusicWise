@@ -56,7 +56,7 @@ exports.getTop10SpotifyRank = function(req, res) {
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
                 'GROUP BY f.music_ID ASC ' +
-                'ORDER BY f.ave_rank; ',
+                'ORDER BY f.ave_rank LIMIT 10; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
