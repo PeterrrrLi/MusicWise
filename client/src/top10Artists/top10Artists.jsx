@@ -44,14 +44,14 @@ function Top10Artists() {
                 <table style={{ color: 'white' }}>
                     <thead>
                         <tr>
-                            <th>Artist Name</th>
                             <th>Spotify Ranking</th>
+                            <th>Artist Name</th>
                         </tr>
                     </thead>
                     <tbody>
                         {spotifyRankings && spotifyRankings.map((ranking, index) => (
                             <tr key={ranking.artist_ID}>
-                                <td><b>{index+1}</b> <span> </span> <span className='purple-text'>(Spotify rank avg: {ranking.avg_ave_rank})</span></td>
+                                <td><b>{index+1}</b> <span> </span> <span className='purple-text'>(avg position: {ranking.avg_ave_rank})</span></td>
                                 <td>{ranking.artist_name}</td>
                             </tr>
                         ))}
