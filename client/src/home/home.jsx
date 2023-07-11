@@ -7,15 +7,14 @@ const Home = () => {
     <div className="home">
       <header className="app-header">
         <img src={logo} className="app-logo" alt="logo" />
-        <h1>xxxxx</h1>
+        <h1>HipHopHierarchy</h1>
         <p>
-          Welcome to Hip Hop Unleashed, the platform for hip hop fans to
+          Welcome to HipHopHierarchy, the platform for hip hop fans to
           explore, rate, and rank their favorite tracks. Discover how fan
           favorites differ from mainstream rankings and join the community
           today!
         </p>
       </header>
-
       <SearchBar />
     </div>
   )
