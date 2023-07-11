@@ -11,19 +11,24 @@ const useSearch = (term) => {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get('/search', {
+      var response = await axios.get('/search', {
         params: {
           term
         }
       });
       console.log('Response:', response);
-      setData(response.data);
+      if (response) {
+        setData(response.data);
+      } else {
+        throw new Error('No response received from server.');
+      }
     } catch (error) {
       console.log('Error:', error);
       setError(error);
     }
     setIsLoading(false);
   };
+  
   
   
   useEffect(() => {

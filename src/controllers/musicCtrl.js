@@ -197,7 +197,7 @@ exports.search = function(req, res) {
             res.status(500).json({ error: 'Failed to retrieve data' });
         } else {
             connection.query(
-                'SELECT m.music_title, a.artist_name ' +
+                'SELECT m.music_ID, m.music_title, a.artist_name ' +
                 'FROM `music_info` m ' +
                 'JOIN `artist` a ON m.artist_ID = a.artist_ID ' +
                 'WHERE m.music_title LIKE ? OR a.artist_name LIKE ?; ',

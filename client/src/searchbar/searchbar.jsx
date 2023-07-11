@@ -5,7 +5,9 @@ import './searchbar.css';
 function SearchResult({ item }) {
   return (
     <div className="search-result">
-      {item.music_title || item.artist_name}
+      <p>Music ID: {item.music_ID}</p>
+      <p>Music Title: {item.music_title}</p>
+      <p>Artist Name: {item.artist_name}</p>
     </div>
   );
 }
@@ -37,8 +39,10 @@ const SearchBar = () => {
           onKeyDown={handleKeyPress}
           placeholder="Search for an artist or song..."
         />
-        {searchResult.data && searchResult.data.map((item, index) => (
-          <SearchResult key={index} item={item} />
+        {searchResult.isLoading && <p className="loading">Loading...</p>}
+        {searchResult.error && <p className="error">Sorry, an error occurred: {searchResult.error.message}</p>}
+        {searchResult.data && searchResult.data.map((item) => (
+          <SearchResult key={item.music_ID} item={item} />
         ))}
       </div>
     </main>
