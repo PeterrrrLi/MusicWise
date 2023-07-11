@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://top-music-database-app-ff988f7a68fa.herokuapp.com/'
+// axios.defaults.baseURL = 'https://top-music-database-app-ff988f7a68fa.herokuapp.com/'
+axios.defaults.baseURL = "http://localhost:8080/"
 
 const useGetTopSpotifyRank = () => {
   const [data, setData] = useState(null);
