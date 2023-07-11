@@ -1,79 +1,64 @@
+
 Feature 1:
+
 music_ID,music_title,avg_rank
-1,"Lucid Dreams",1.0000
-4,rockstar,5.0000
+1,"Ghost Face",1.0000
+2,Snow,2.0000
+3,"Mr. Bentley",3.0000
+4,"Mr. Almost",4.0000
+5,"Dummy Song Name1",5.0000
+6,"Dummy Song Name2",6.0000
+7,"Dummy Song Name3",7.0000
+8,"Dummy Song Name4",8.0000
+9,"Dummy Song Name5",9.0000
+10,"Dummy Song Name6",10.0000
 
 Feature 2:
-music_ID,music_title,avg_rank
-7398,"Slave Master",0
-70,Eastside,0
-8262,"White Christmas",0
-934,"Leave Before You Love Me",0
-9126,"Summer 2020  interlude",0
-1798,"Over The Top",0
-9990,"Basement (Feat. Jessie Reyez)",0
-2662,"Started From the Bottom",0
-10854,M.F.T.R.,0
-3526,"Bad To You",0
+
+artist_ID,artist_name,avg_rank
+1,Pharaoh,1.0000
+2,Capper,2.0000
+3,"Higher Brothers",3.0000
+4,"MC HotDog",4.0000
+5,Gai,5.0000
+6,Vava,6.0000
+7,Vinida,7.0000
+8,"Tizzy T",8.0000
+9,MaSiWei,9.0000
+10,Knowknow,10.0000
+11,"MC Jin",11.0000
+12,"Jony J",12.0000
+13,"Key NG",13.0000
 
 Feature 3:
-artist_ID,avg_ave_rank
-1290,1798.0000
-1357,2109.5000
-954,5678.0000
-620,5878.4000
-515,2529.0000
-779,2713.0000
-1282,7342.3333
-629,3183.0000
-372,8066.0000
-687,4466.0000
+
+music_ID,music_title
+1,"Ghost Face"
+2,Snow
+3,"Mr. Bentley"
+4,"Mr. Almost"
+5,"Dummy Song Name1"
 
 Feature 4:
-music_ID,music_title
-416,"Its A Vibe"
-802,"4 AM"
-1364,"Good Drank"
-1382,"Bigger Than You"
-1593,"Watch Out"
-3360,Whip
-3593,PROUD
-4234,"Rule The World"
-4287,"Gotta Lotta"
-4498,"Big Amount"
+
+music_ID,music_title,Spotify_Rank,Fan_Rank
+1,"Ghost Face",1,1
+2,Snow,2,2
 
 Feature 5:
-music_ID,music_title,Spotify_Rank,Fan_Rank
-1,"Lucid Dreams",0,0
-
 
 rank_ID,music_ID,rank
 1,1,1
-2,4,5
-4,2,100
-
-Feature 6:
-music_ID,artist_ID,music_title,artist_name,artist_rank,days,ave_rank,total_stream,top_10_frequency
-4714,1469,!,"Trippie Redd ",0,7,0,2625768,0
-8889,1159,""42"","Rae Sremmurd ",0,1,0,297731,0
-4541,1594,""Hit the Quan" #HTQ","iLoveMemphis ",0,26,0,2929154,0
-4298,1412,#icanteven,"The Neighbourhood ",0,51,0,3490292,0
-6165,1533,#PROUDCATOWNERREMIX,"XXXTENTACION ",0,4,0,1233489,0
-2811,1533,"$$$  with Matt Ox","XXXTENTACION ",0,33,0,10487523,0
-1496,819,"$ave Dat Money","Lil Dicky ",0,226,0,31206265,0
-6102,2,"$uicideboy$ Were Better In 2015","$uicideboy$ ",0,5,0,1283855,0
-3883,180,"(Dont Fear) The Reaper","Blue Öyster Cult ",0,15,0,4723676,0
-7530,735,"(Everybodys Waitin For) The Man With The Bag ","Kay Starr ",0,2,0,605037,0
-
-
-music_ID,artist_ID,music_title,artist_name,artist_rank,days,ave_rank,total_stream,top_10_frequency
-4714,1469,!,"Trippie Redd ",0,7,0,2625768,0
-1012,1469,"1400 / 999 Freestyle","Trippie Redd ",0,148,0,50938549,0
-1414,1469,"6 Kiss","Trippie Redd ",0,91,0,33472853,2
-5282,1469,"A.L.L.T.Y. 3","Trippie Redd ",0,6,0,1951127,0
-8691,1469,Abandoned,"Trippie Redd ",0,1,0,317182,0
-7153,1469,"Ain’t Safe","Trippie Redd ",0,2,0,717324,0
-7051,1469,"All For Me","Trippie Redd ",0,2,0,751550,0
-7332,1469,Baki,"Trippie Redd ",0,2,0,656949,0
-4507,1469,BANG!,"Trippie Redd ",0,9,0,3013147,0
-6507,1469,"Be Yourself","Trippie Redd ",0,3,0,1034968,0
+2,2,2
+3,3,3
+4,4,4
+5,5,5
+6,6,6
+7,7,7
+8,8,8
+9,9,9
+10,10,10
+11,11,11
+12,12,12
+13,13,13
+14,2,100

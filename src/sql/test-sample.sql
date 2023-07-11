@@ -15,7 +15,7 @@ GROUP BY f.music_ID ASC
 ORDER BY f.ave_rank LIMIT 10;
 
 -- top 10 artist by average Spotify rank
-SELECT m.artist_ID, AVG(m.music_ID) as avg_ave_rank 
+SELECT m.artist_ID, AVG(ave_rank) as avg_ave_rank 
 FROM `spotify_rank` f 
 JOIN `music_info` m 
 ON f.music_ID = m.music_ID 
@@ -45,16 +45,9 @@ VALUES (2, 100);
 SELECT * FROM fan_music_rank;
 
 
-te
-
-
 SELECT *
-FROM music_info mi NATURAL JOIN artist a NATURAL JOIN music_age ma NATURAL JOIN spotify_rank sr
-WHERE a.artist_name LIKE '%Trippie%'
+FROM music_info mi NATURAL JOIN artist a NATURAL JOIN music_age ma NATURAL JOIN spotify_rank sr NATURAL JOIN fan_music_rank fr
 ORDER BY music_title ASC;
-
-
-
 
 
 
