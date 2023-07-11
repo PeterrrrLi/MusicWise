@@ -56,7 +56,7 @@ exports.getTop10SpotifyRank = function(req, res) {
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
                 'GROUP BY f.music_ID ASC ' +
-                'ORDER BY f.ave_rank; ',
+                'ORDER BY f.ave_rank LIMIT 10; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
@@ -77,7 +77,7 @@ exports.getTop10SpotifyRank = function(req, res) {
 // @desc        Get Top 10 artists by Rank
 // @route       GET /getTop10Artists
 // @access      Public
-exports.getTop10Artists = function(req, res) {
+exports.getTop10FanArtists = function(req, res) {
     const sqlPool = getDBInstance();
     
     // Acquire a connection from the pool
@@ -88,7 +88,52 @@ exports.getTop10Artists = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT f.artist_ID, artist_name, AVG(rank) as avg_rank FROM `fan_artist_rank` f JOIN `artist` a ON f.artist_ID = a.artist_ID GROUP BY artist_ID  ORDER BY AVG(rank) LIMIT 20;',
+                'SELECT f.artist_ID, artist_name, AVG(rank) as avg_rank '+
+                'FROM `fan_artist_rank` f '+
+                'JOIN `artist` a '+
+                'ON f.artist_ID = a.artist_ID '+
+                'GROUP BY artist_ID '+
+                'ORDER BY AVG(rank) LIMIT 10;',
+                (error, results, fields) => {
+                    // Release the connection back to the pool
+                    connection.release();
+
+                    if (error) {
+                        console.error('Error executing query:', error);
+                        res.status(500).json({ error: 'Failed to retrieve data' });
+                    } else {
+                        res.status(200).json(results);
+                    }
+                }
+            );
+        }
+    });
+};
+
+// @desc        Get Top 10 songs by SpotifyRank
+// @route       GET /getTop10SpotifyArtists
+// @access      Public
+exports.getTop10SpotifyArtists = function(req, res) {
+    const sqlPool = getDBInstance();
+    
+    // Acquire a connection from the pool
+    sqlPool.pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error acquiring connection from pool:', err);
+            res.status(500).json({ error: 'Failed to retrieve data' });
+        } else {
+            // Execute the query using the acquired connection
+            connection.query(
+                'SELECT t1.artist_ID, artist_name, avg_ave_rank  ' +
+                'FROM artist  ' +
+                'JOIN ( ' +
+                'SELECT m.artist_ID as artist_ID, AVG(ave_rank) as avg_ave_rank  ' +
+                'FROM `spotify_rank` f  ' +
+                'JOIN `music_info` m  ' +
+                'ON f.music_ID = m.music_ID  ' +
+                'GROUP BY artist_ID  ' +
+                'ORDER BY AVG(ave_rank) LIMIT 20 ) AS t1 ' +
+                'ON t1.artist_ID = artist.artist_ID ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
@@ -181,7 +226,6 @@ exports.hello = function(req, res) {
     res.status(200).json({"message:":"hello world"});              
 };
 
-
 // @desc        Search for songs or artists
 // @route       GET /search
 // @access      Public
@@ -215,3 +259,4 @@ exports.search = function(req, res) {
         }
     });
 };
+
