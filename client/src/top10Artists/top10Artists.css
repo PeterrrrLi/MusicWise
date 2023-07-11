@@ -46,3 +46,11 @@ td {
   font-size: 1.4rem;
   color:#fff;
 }
+
+span{
+  margin-right: 1rem;
+}
+
+.purple-text{
+  color: rgb(142, 132, 186);
+}
