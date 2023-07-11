@@ -51,12 +51,11 @@ exports.getTop10SpotifyRank = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT m.music_ID, music_title, ave_rank as avg_rank ' +
+                'SELECT m.music_ID, music_title, m.music_ID as avg_rank ' +
                 'FROM `spotify_rank` f ' +
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
-                'GROUP BY f.music_ID ASC ' +
-                'ORDER BY f.ave_rank LIMIT 10; ',
+                'ORDER BY f.music_ID LIMIT 10; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
