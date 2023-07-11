@@ -1,37 +1,41 @@
 import React, { useEffect } from 'react';
-import useGetTopRanked from '../hooks/useGetTopRanked';
+import useGetAllSongs from '../hooks/useGetAllSongs';
 import './allSongs.css'
 
 function AllSongs() {
-    const { data: rankings, isLoading, error } = useGetTopRanked();
-    if (isLoading) {
+    const { data: allSongs, isLoadingAllSongs, error } = useGetAllSongs();
+    if (isLoadingAllSongs) {
         return <p>Loading...</p>;
     }
 
     if (error) {
-        return <p>Error occurred: {error.message}</p>;
+        return <p>Error occurred: {error.message} </p>;
     }
 
+    allSongs && console.log(allSongs)
+
     return (
-        <>{
-            <table style={{ color: 'white' }}>
-                <thead>
-                <tr>
-                    <th>Music ID</th>
-                    <th>Rank</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {rankings && rankings.map((ranking) => (
-                        <tr key={ranking.music_ID}>
-                            <td>{ranking.music_ID}</td>
-                            <td>{ranking.avg_rank}</td>
+        <>
+            <div style={{ display: 'flex' }}>
+                <table style={{ color: 'white' }}>
+                    <thead>
+                        <tr>
+                            <th>Music Title</th>
+                            <th>Artist Name</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        }
+                    </thead>
+                    <tbody>
+                        {allSongs && allSongs.map((song) => (
+                            <tr key={song.music_ID}>
+                                <td>{song.music_title}</td>
+                                <td>{song.artist_name}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
+        
     );
 }
 

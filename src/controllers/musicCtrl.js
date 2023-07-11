@@ -164,7 +164,10 @@ exports.getAllSongs = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT music_ID, music_title FROM `music_info` m JOIN (SELECT a.artist_ID, artist_name, AVG(rank) as avg_rank  FROM `fan_artist_rank` f JOIN `artist` a  ON f.artist_ID = a.artist_ID GROUP BY f.artist_ID  ORDER BY AVG(rank)) c ON m.artist_ID = c.artist_ID;',
+                'SELECT f.music_ID, m.music_title, a.artist_ID, artist_name '+
+                'FROM `spotify_rank` f, `artist` a, `music_info` m '+
+                'WHERE m.artist_ID = a.artist_ID and m.music_ID = f.music_id '+
+                'ORDER BY music_title ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                      connection.release();
