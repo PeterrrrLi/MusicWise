@@ -14,21 +14,28 @@ function Top10Artists() {
         return <p>Error occurred: {error1.message} {error2.message} </p>;
     }
 
+    if (fanRankings && spotifyRankings){
+        fanRankings.sort((a, b) => {return a.avg_rank <= b.avg_rank ? 1 : -1});
+    }
+
+    
+
     return (
         <>
             <div style={{ display: 'flex' }}>
                 <table style={{ color: 'white' }}>
                     <thead>
                         <tr>
-                            <th>Artist Name</th>
                             <th>Fan Ranking</th>
+                            <th>Artist Name</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {fanRankings && fanRankings.map((ranking) => (
+                        {fanRankings && fanRankings.map((ranking, index) => (
                             <tr key={ranking.artist_id}>
-                                <td>{ranking.artist_name}</td>
-                                <td>{ranking.avg_rank}</td>
+                                <td><b>{index+1}</b> <span> </span> <span className='purple-text'>(rating: {ranking.avg_rank})</span></td>
+                                <td>{ranking.artist_name} </td>
+
                             </tr>
                         ))}
                     </tbody>
@@ -42,10 +49,10 @@ function Top10Artists() {
                         </tr>
                     </thead>
                     <tbody>
-                        {spotifyRankings && spotifyRankings.map((ranking) => (
+                        {spotifyRankings && spotifyRankings.map((ranking, index) => (
                             <tr key={ranking.artist_ID}>
+                                <td><b>{index+1}</b> <span> </span> <span className='purple-text'>(Spotify rank avg: {ranking.avg_ave_rank})</span></td>
                                 <td>{ranking.artist_name}</td>
-                                <td>{ranking.avg_ave_rank}</td>
                             </tr>
                         ))}
                     </tbody>
