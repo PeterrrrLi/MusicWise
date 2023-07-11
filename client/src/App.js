@@ -13,23 +13,6 @@ import AllSongs from './allSongs/allSongs';
 
 export default function App() {
   
-  const [search, setSearch] = useState('');
-
-  const handleSearchChange = event => {
-    setSearch(event.target.value);
-  };
-
-  const handleKeyPress = event => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  };
-
-  const handleSearch = () => {
-    console.log('Searching for:', search);
-    //  call API to get the search results
-  };
-
   return (
     <div>
       <NavBar />

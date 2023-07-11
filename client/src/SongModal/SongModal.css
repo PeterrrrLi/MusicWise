@@ -1,0 +1,66 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.Modal {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 70%;
+  background: #333;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  color: #fff;
+}
+
+.Modal h2 {
+  margin-bottom: 15px;
+}
+
+.Modal .rank-input {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.Modal .rank-input input {
+  width: 50px;
+  height: 30px;
+  margin-right: 10px;
+  color: #000;
+}
+
+.Modal .rank-input button {
+  background: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.CustomModalPortal .close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+
