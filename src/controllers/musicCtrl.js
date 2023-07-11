@@ -226,6 +226,7 @@ exports.hello = function(req, res) {
     res.status(200).json({"message:":"hello world"});              
 };
 
+
 // @desc        Search for songs or artists
 // @route       GET /search
 // @access      Public
