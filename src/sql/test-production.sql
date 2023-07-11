@@ -15,12 +15,10 @@ GROUP BY f.music_ID ASC
 ORDER BY f.ave_rank LIMIT 10;
 
 -- top 10 artist by average Spotify rank
-SELECT m.artist_ID, AVG(m.music_ID) as avg_ave_rank 
-FROM `spotify_rank` f 
-JOIN `music_info` m 
-ON f.music_ID = m.music_ID 
+SELECT m.artist_ID, AVG(ave_rank) as avg_ave_rank 
+FROM `spotify_rank` f NATURAL JOIN `music_info` m 
 GROUP BY artist_ID 
-ORDER BY AVG(ave_rank) LIMIT 10;
+ORDER BY AVG(ave_rank) DESC LIMIT 10;
 
 SELECT music_ID, music_title
 FROM `music_info` m
@@ -43,9 +41,6 @@ JOIN music_info m ON s.music_ID = m.music_ID;
 INSERT INTO fan_music_rank (music_ID, rank)
 VALUES (2, 100);
 SELECT * FROM fan_music_rank;
-
-
-te
 
 
 SELECT *
