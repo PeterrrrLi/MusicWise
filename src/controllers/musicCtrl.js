@@ -134,7 +134,8 @@ exports.getTop10SpotifyArtists = function(req, res) {
                 '    WHERE f.ave_rank != 0 '+
                 '    GROUP BY artist_ID  '+
                 '    ORDER BY AVG(f.ave_rank) LIMIT 20 ) AS t1 '+
-                'ON t1.artist_ID = artist.artist_ID; ',
+                'ON t1.artist_ID = artist.artist_ID ' +
+                'limit 10; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
