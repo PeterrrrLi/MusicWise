@@ -10,11 +10,14 @@ Users are able to search for specific songs using the search bar on the home pag
 
 #### Display User Song Ranking
 On the Top 10 Songs page, a table containing top 10 User Ranked Song results will show, with song title and rank in each entry.
-<img width="1337" alt="fan song rank" src="https://github.com/PeterrrrLi/Top-Music-Database-APP/assets/66461994/dc955a18-fa1e-4366-99c9-0ed6e48d7f00">
+<img width="1148" alt="song fan rank" src="https://github.com/PeterrrrLi/Top-Music-Database-APP/assets/66461994/ff16a9ba-1259-4dea-986e-eeca663e2e62">
+
 
 #### Display Spotify Song Ranking
 On the Top 10 Songs page, a table containing top 10 Spotify Ranked Song results will show, with song title and rank in each entry. Together with the top 10 User Ranked Song table, they illustrate the difference in the preference of our users and official Spotify rankings.
-<img width="1337" alt="spotify song rank" src="https://github.com/PeterrrrLi/Top-Music-Database-APP/assets/66461994/f461ea38-44ff-4c3a-ba21-043f5d2ece26">
+<img width="1148" alt="spotify rank" src="https://github.com/PeterrrrLi/Top-Music-Database-APP/assets/66461994/a6a8e90f-d83f-4154-a6d3-63b696b78a1f">
+
+
 
 #### Display User Artist Ranking
 On the Top 10 Artists page, a table containing top 10 User Ranked Artist results will show, with Artist name and rank in each entry.
