@@ -11,7 +11,8 @@ SELECT m.music_ID, music_title, ave_rank as avg_rank
 FROM `spotify_rank` f
 JOIN `music_info` m
 ON f.music_ID = m.music_ID
-GROUP BY f.music_ID ASC
+WHERE f.ave_rank != 0
+GROUP BY f.music_ID
 ORDER BY f.ave_rank LIMIT 10;
 
 -- top 10 artist by average Spotify rank
