@@ -127,13 +127,15 @@ exports.getTop10SpotifyArtists = function(req, res) {
                 'SELECT t1.artist_ID, artist_name, avg_ave_rank  '+
                 'FROM artist  '+
                 'JOIN ( '+
-                '    SELECT m.artist_ID as artist_ID, AVG(f.music_ID) as avg_ave_rank  '+
+                '    SELECT m.artist_ID as artist_ID, AVG(f.ave_rank) as avg_ave_rank  '+
                 '    FROM `spotify_rank` f  '+
                 '    JOIN `music_info` m  '+
                 '    ON f.music_ID = m.music_ID  '+
+                '    WHERE f.ave_rank != 0 '+
                 '    GROUP BY artist_ID  '+
-                '    ORDER BY AVG(f.music_ID) LIMIT 10 ) AS t1 '+
-                'ON t1.artist_ID = artist.artist_ID; ',
+                '    ORDER BY AVG(f.ave_rank) LIMIT 20 ) AS t1 '+
+                'ON t1.artist_ID = artist.artist_ID ' +
+                'limit 10; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
@@ -164,7 +166,10 @@ exports.getAllSongs = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT music_ID, music_title FROM `music_info` m JOIN (SELECT a.artist_ID, artist_name, AVG(rank) as avg_rank  FROM `fan_artist_rank` f JOIN `artist` a  ON f.artist_ID = a.artist_ID GROUP BY f.artist_ID  ORDER BY AVG(rank)) c ON m.artist_ID = c.artist_ID;',
+                'SELECT f.music_ID, m.music_title, a.artist_ID, artist_name '+
+                'FROM `spotify_rank` f, `artist` a, `music_info` m '+
+                'WHERE m.artist_ID = a.artist_ID and m.music_ID = f.music_id '+
+                'ORDER BY music_title ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                      connection.release();
