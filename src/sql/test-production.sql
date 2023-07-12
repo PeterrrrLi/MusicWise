@@ -37,6 +37,9 @@ JOIN (
 ON t1.artist_ID = artist.artist_ID
 limit 10;
 
+-- Feature 5: top 10 artist by average Spotity rank
+INSERT INTO `fan_music_rank` (`music_ID`, `rank`) VALUES (2, 3)
+
 -- Feature 6: search by song name or artist name
 SELECT m.music_ID, m.music_title, a.artist_name
 FROM `music_info` m
