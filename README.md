@@ -6,7 +6,8 @@ HipHopHierarchy is a highly interactive, **database**-driven, **RESTful** web-ba
 ### Currently Supported Features:  
 #### Search for songs & artists
 Users are able to search for specific songs using the search bar on the home page. The results shown will contain the user input in either the `song title` or the `artist name`
-<img width="1577" alt="Screen Shot 2023-07-11 at 7 25 22 PM" src="https://github.com/PeterrrrLi/Top-Music-Database-APP/assets/66461994/93d5e833-b350-4b18-85db-dc23295ebaab">
+<img width="891" alt="Screen Shot 2023-07-11 at 9 46 16 PM" src="https://github.com/PeterrrrLi/Top-Music-Database-APP/assets/66461994/dca55298-e039-45a4-af23-316df6ef57bb">
+
 
 #### Display User Song Ranking
 On the Top 10 Songs page, a table containing top 10 User Ranked Song results will show, with song title and rank in each entry.
