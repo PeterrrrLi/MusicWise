@@ -1,4 +1,4 @@
-import logo from '../resorce/placeholder.png'
+import logo from '../resorce/rapper.jpg'
 import SearchBar from '../searchbar/searchbar.jsx'
 import './home.css'
 
@@ -9,10 +9,10 @@ const Home = () => {
         <img src={logo} className="app-logo" alt="logo" />
         <h1>HipHopHierarchy</h1>
         <p>
-          Welcome to HipHopHierarchy, the platform for hip hop fans to
-          explore, rate, and rank their favorite tracks. Discover how fan
-          favorites differ from mainstream rankings and join the community
-          today!
+          Welcome to HipHopHierarchy! Dive into our unique fan-based platform that allows you 
+          to explore, rank, and dissect tracks and artists from Spotify's 
+          Streamed Songs. Discover how fan favorites differ from mainstream 
+          rankings and join the community today!
         </p>
       </header>
       <SearchBar />
