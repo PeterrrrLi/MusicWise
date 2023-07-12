@@ -127,12 +127,13 @@ exports.getTop10SpotifyArtists = function(req, res) {
                 'SELECT t1.artist_ID, artist_name, avg_ave_rank  '+
                 'FROM artist  '+
                 'JOIN ( '+
-                '    SELECT m.artist_ID as artist_ID, AVG(f.music_ID) as avg_ave_rank  '+
+                '    SELECT m.artist_ID as artist_ID, AVG(f.ave_rank) as avg_ave_rank  '+
                 '    FROM `spotify_rank` f  '+
                 '    JOIN `music_info` m  '+
                 '    ON f.music_ID = m.music_ID  '+
+                '    WHERE f.ave_rank != 0 '+
                 '    GROUP BY artist_ID  '+
-                '    ORDER BY AVG(f.music_ID) LIMIT 10 ) AS t1 '+
+                '    ORDER BY AVG(f.ave_rank) LIMIT 20 ) AS t1 '+
                 'ON t1.artist_ID = artist.artist_ID; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
