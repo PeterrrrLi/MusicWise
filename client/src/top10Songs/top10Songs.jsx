@@ -28,7 +28,7 @@ function Top10Songs() {
                         {fanRankings && fanRankings.map((ranking) => (
                             <tr key={ranking.music_ID}>
                                 <td>{ranking.music_title}</td>
-                                <td>{ranking.avg_rank}</td>
+                                <td>{ranking.avg_rank} <span> </span> <span className='purple-text'>({ranking.rank_count} ratings)</span></td>
                             </tr>
                         ))}
                     </tbody>

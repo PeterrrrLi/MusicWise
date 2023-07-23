@@ -15,7 +15,7 @@ exports.getTop10FanRank = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT m.music_ID, music_title, AVG(rank) as avg_rank ' +
+                'SELECT m.music_ID, music_title, count(rank) as rank_count, AVG(rank) as avg_rank ' +
                 'FROM `fan_music_rank` f ' +
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
@@ -76,7 +76,7 @@ exports.getTop10SpotifyRank = function(req, res) {
 
 
 // @desc        Get Top 10 artists by Rank
-// @route       GET /getTop10Artists
+// @route       GET /getTop10FanArtists
 // @access      Public
 exports.getTop10FanArtists = function(req, res) {
     const sqlPool = getDBInstance();
