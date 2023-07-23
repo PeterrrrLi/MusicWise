@@ -6,8 +6,6 @@ import Navbar from 'react-bootstrap/Navbar'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFire } from '@fortawesome/free-solid-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-
 
 import './navbar.css'
 

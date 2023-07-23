@@ -56,7 +56,6 @@ exports.getTop10SpotifyRank = function(req, res) {
                 'JOIN `music_info` m ' +
                 'ON f.music_ID = m.music_ID ' +
                 'WHERE f.ave_rank != 0 ' +
-                'GROUP BY f.music_ID ' +
                 'ORDER BY f.ave_rank LIMIT 10; ',
                 (error, results, fields) => {
                     // Release the connection back to the pool
@@ -89,12 +88,15 @@ exports.getTop10FanArtists = function(req, res) {
         } else {
             // Execute the query using the acquired connection
             connection.query(
-                'SELECT f.artist_ID, artist_name, AVG(rank) as avg_rank '+
-                'FROM `fan_artist_rank` f '+
-                'JOIN `artist` a '+
-                'ON f.artist_ID = a.artist_ID '+
-                'GROUP BY artist_ID '+
-                'ORDER BY AVG(rank) LIMIT 10;',
+                'select a.artist_id, artist_name, avg_rank '+
+                'from `artist` a '+
+                'join (	select avg(f.rank) as avg_rank, m.music_id, m.artist_id '+
+                '        from `fan_music_rank` f '+
+                '        join `music_info` m '+
+                '        on f.music_id = m.music_id '+
+                '        GROUP BY artist_ID) as t1 '+
+                'on a.artist_id = t1.artist_id '+
+                'ORDER BY avg_rank LIMIT 10;',
                 (error, results, fields) => {
                     // Release the connection back to the pool
                     connection.release();
