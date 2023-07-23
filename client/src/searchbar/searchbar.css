@@ -39,6 +39,8 @@
 .search-result .title {
     cursor: pointer;
     color: #bb86fc;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /* New styles */

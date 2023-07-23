@@ -6,8 +6,7 @@ import SongModal from '../SongModal/SongModal';
 function SearchResult({ item, onTitleClick }) {
   return (
     <div className="search-result">
-      <p>Music ID: {item.music_ID}</p>
-      <p className="title" onClick={() => onTitleClick(item)}>Music Title: {item.music_title}</p>
+      <p className="title" onClick={() => onTitleClick(item)}>{item.music_title}</p>
       <p>Artist Name: {item.artist_name}</p>
     </div>
   );
@@ -15,7 +14,7 @@ function SearchResult({ item, onTitleClick }) {
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
-  const [searchTerm, setSearchTerm] = useState(''); 
+  const [searchTerm, setSearchTerm] = useState(null);
   const searchResult = useSearch(searchTerm);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [selectedSong, setSelectedSong] = useState(null);
@@ -25,7 +24,7 @@ const SearchBar = () => {
   };
 
   const handleKeyPress = event => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && search.trim()) {
       console.log('Enter key pressed, searching for:', search);
       setSearchTerm(search);
     }
