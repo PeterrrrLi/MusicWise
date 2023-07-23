@@ -12,26 +12,44 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;
-  height: 70%;
+  width: 33%;
+  height: 42%;
   background: #333;
-  overflow: auto;
+  overflow: hidden;
   border-radius: 4px;
   outline: none;
   padding: 20px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.Modal h2 {
+.Modal h1 {
+  margin-bottom: 10px;
+  font-size: 2.5em;
+  font-family: 'Gothic A1', sans-serif;
+}
+
+.Modal .subtitle {
   margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.Modal .content-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .Modal .rank-input {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
 .Modal .rank-input input {
@@ -41,7 +59,7 @@
   color: #000;
 }
 
-.Modal .rank-input button {
+.Modal .rank-button {
   background: none;
   color: #fff;
   border: 1px solid #fff;
@@ -50,7 +68,18 @@
   margin-left: 10px;
 }
 
-.CustomModalPortal .close-button {
+.Modal .rank-reminder {
+  color: #f0f0f0;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.Modal .flame-img {
+  width: 100%;
+  height: 143px;
+}
+
+.Portal .close-button {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -61,6 +90,9 @@
   cursor: pointer;
 }
 
-
-
-
+.Modal .submitted-message {
+  color: #66ff66; 
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  transition: opacity 0.5s ease;
+}
