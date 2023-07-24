@@ -15,8 +15,9 @@ export default function App() {
   
   return (
     <div>
-      <NavBar />
+      
       <BrowserRouter>
+        <NavBar />
         <Routes>
           <Route index element={<Home />} />
           <Route path="top10Songs" element={<Top10Songs />} />
