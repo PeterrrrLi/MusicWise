@@ -52,5 +52,18 @@ span{
 }
 
 .purple-text{
-  color: rgb(142, 132, 186);
+  color: rgb(114, 104, 157);
+}
+
+.yellow-text{
+  color: #FFB400;
+
+}
+
+.star-comp{
+  margin-bottom: -0.6rem;
+}
+
+.dv-star-rating-star{
+  margin-right: -0.2rem !important
 }

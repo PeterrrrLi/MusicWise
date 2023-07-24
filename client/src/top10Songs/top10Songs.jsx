@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import useGetTopRanked from '../hooks/useGetTopRanked';
 import useGetTopSpotifyRank from '../hooks/useGetTopSpotifyRank';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import './top10Songs.css'
 
 function Top10Songs() {
@@ -14,6 +16,10 @@ function Top10Songs() {
         return <p>Error occurred: {error1.message} {error2.message} </p>;
     }
 
+    if (fanRankings && spotifyRankings){
+        fanRankings.sort((a, b) => {return a.avg_rank <= b.avg_rank ? 1 : -1});
+    }
+
     return (
         <>
             <div style={{ display: 'flex' }}>
@@ -25,10 +31,15 @@ function Top10Songs() {
                         </tr>
                     </thead>
                     <tbody>
-                        {fanRankings && fanRankings.map((ranking) => (
+                        {fanRankings && fanRankings.map((ranking,index) => (
                             <tr key={ranking.music_ID}>
                                 <td>{ranking.music_title}</td>
-                                <td>{ranking.avg_rank}</td>
+                                    <td><b># {index+1}</b> 
+                                    <span></span>
+                                    <span className='purple-text'>
+                                        (<FontAwesomeIcon icon={faStar}/> <b>{ranking.avg_rank}</b> by <b>{ranking.rank_count}</b> ratings)
+                                        </span>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -42,10 +53,10 @@ function Top10Songs() {
                         </tr>
                     </thead>
                     <tbody>
-                        {spotifyRankings && spotifyRankings.map((ranking) => (
+                        {spotifyRankings && spotifyRankings.map((ranking, index) => (
                             <tr key={ranking.music_ID}>
                                 <td>{ranking.music_title}</td>
-                                <td>{ranking.avg_rank}</td>
+                                <td><b># {index+1}</b></td>
                             </tr>
                         ))}
                     </tbody>

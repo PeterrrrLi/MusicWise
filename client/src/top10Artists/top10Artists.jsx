@@ -1,7 +1,15 @@
 import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import useGetTopArtists from '../hooks/useGetTopArtists';
 import useGetTopSpotifyArtists from '../hooks/useGetTopSpotifyArtists';
 import './top10Artists.css'
+import StarRatingComponent from 'react-star-rating-component';
+
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStarHalf } from '@fortawesome/free-solid-svg-icons'
+
 
 function Top10Artists() {
     const { data: fanRankings, isLoadingFanRank, error1 } = useGetTopArtists();
@@ -26,16 +34,27 @@ function Top10Artists() {
                 <table style={{ color: 'white' }}>
                     <thead>
                         <tr>
-                            <th>Fan Ranking</th>
                             <th>Artist Name</th>
+                            <th>Fan Ranking</th>
                         </tr>
                     </thead>
                     <tbody>
                         {fanRankings && fanRankings.map((ranking, index) => (
                             <tr key={ranking.artist_id}>
-                                <td><b>{index+1}</b> <span> </span> <span className='purple-text'>(rating: {ranking.avg_rank})</span></td>
                                 <td>{ranking.artist_name} </td>
-
+                                <td><b># {index+1}</b> 
+                                    <span> </span>
+                                    <StarRatingComponent 
+                                            className="star-comp"
+                                            name="rate2" 
+                                            editing={false}
+                                            renderStarIcon={() => <span><FontAwesomeIcon icon={faStar} /></span>}
+                                            renderStarIconHalf={() => <span className='purple-text'><FontAwesomeIcon icon={faStarHalf} /></span>}
+                                            starCount={5}
+                                            starColor={"#72689D"}
+                                            value={ranking.avg_rank/2}
+                                    />
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -44,15 +63,15 @@ function Top10Artists() {
                 <table style={{ color: 'white' }}>
                     <thead>
                         <tr>
-                            <th>Spotify Ranking</th>
                             <th>Artist Name</th>
+                            <th>Spotify Ranking</th>
                         </tr>
                     </thead>
                     <tbody>
                         {spotifyRankings && spotifyRankings.map((ranking, index) => (
                             <tr key={ranking.artist_ID}>
-                                <td><b>{index+1}</b> <span> </span> <span className='purple-text'>(avg position: {ranking.avg_ave_rank})</span></td>
                                 <td>{ranking.artist_name}</td>
+                                <td><b># {index+1}</b> <span> </span> <span className='purple-text'>(avg position: {ranking.avg_ave_rank})</span></td>
                             </tr>
                         ))}
                     </tbody>
